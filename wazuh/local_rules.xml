@@ -1,0 +1,16 @@
+<group name="windows,powershell,authentication,">
+  <rule id="110200" level="8">
+    <if_group>windows</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\powershell\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(-enc|-encodedcommand|-e)\s+</field>
+    <description>Suspicious PowerShell encoded command</description>
+    <mitre><id>T1059.001</id></mitre>
+  </rule>
+
+  <rule id="110210" level="7" frequency="6" timeframe="120">
+    <if_matched_sid>5710</if_matched_sid>
+    <same_source_ip />
+    <description>Repeated SSH authentication failures from the same source</description>
+    <mitre><id>T1110</id></mitre>
+  </rule>
+</group>
